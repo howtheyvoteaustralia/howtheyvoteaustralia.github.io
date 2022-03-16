@@ -1,0 +1,23 @@
+.sentence-capitalize:first-letter {
+  text-transform: capitalize;
+}
+
+.graph-label-font {
+  font-size: 0.675em;
+}
+
+.grey-underline-divider {
+  border-bottom: 0.01px solid rgb(213 213 213);
+}
+
+a:not([class]) {
+  text-decoration: none;
+}
+
+a:not([class]):hover {
+  text-decoration: underline;
+}
+
+.pointer {
+  cursor: pointer;
+}
