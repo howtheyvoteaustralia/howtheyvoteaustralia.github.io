@@ -2,6 +2,7 @@ import React from "react";
 import PolicyCard from "./PolicyCard";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
 import "./App.css";
 
 class App extends React.Component {
@@ -106,40 +107,57 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App container">
-        <header className="App-header">
-          <Form.Group className="mt-3 mb-1" controlId="formBasicEmail">
-            <Form.Control
-              type="email"
-              placeholder="Search"
-              value={this.state.query}
-              onChange={this.onSearch}
+      <>
+        <div className="bg-light py-3">
+          <Container>
+            <h3>HOW THEY VOTE</h3>
+            <p>
+              Data from{" "}
+              <a href="https://theyvoteforyou.org.au/" target="_blank">
+                theyvoteforyou.org.au
+              </a>{" "}
+              organised into their political parties.
+            </p>
+          </Container>
+        </div>
+
+        <div className="App container">
+          <header className="App-header">
+            <Form.Group className="mt-3 mb-1" controlId="formBasicEmail">
+              <Form.Control
+                type="email"
+                placeholder="Search"
+                value={this.state.query}
+                onChange={this.onSearch}
+              />
+            </Form.Group>
+            <TagFilters
+              filterByTag={this.filterByTag}
+              removeTag={this.removeTag}
+              tag={this.state.tag}
             />
-          </Form.Group>
-          <TagFilters
-            filterByTag={this.filterByTag}
-            removeTag={this.removeTag}
-            tag={this.state.tag}
-          />
-        </header>
-        <main>
-          <div>
-            {this.state.policies.map((policy) => (
-              <PolicyCard key={policy.id} policy={policy} />
-            ))}
-          </div>
-          {this.state.policyIds.length > 0 && !this.state.query && (
-            <div className="text-center p-3">
-              <Button
-                variant="btn btn-outline-secondary"
-                onClick={this.loadMore}
-              >
-                Load More
-              </Button>
+          </header>
+          <main>
+            <div>
+              {this.state.policies.map((policy) => (
+                <PolicyCard key={policy.id} policy={policy} />
+              ))}
             </div>
-          )}
-        </main>
-      </div>
+            {this.state.policyIds.length > 0 &&
+              !this.state.query &&
+              !this.state.tag && (
+                <div className="text-center p-3">
+                  <Button
+                    variant="btn btn-outline-secondary"
+                    onClick={this.loadMore}
+                  >
+                    Load More
+                  </Button>
+                </div>
+              )}
+          </main>
+        </div>
+      </>
     );
   }
 }
@@ -153,7 +171,7 @@ function TagFilters(props) {
             value={index}
             onClick={() => props.removeTag(index)}
             key={tag}
-            className="badge rounded-pill bg-light bg-dark pointer"
+            className="badge rounded-pill text-light bg-dark pointer"
           >
             {tag}
           </span>

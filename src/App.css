@@ -21,3 +21,7 @@ a:not([class]):hover {
 .pointer {
   cursor: pointer;
 }
+
+.bg-light {
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
