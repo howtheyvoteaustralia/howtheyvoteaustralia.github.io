@@ -45,7 +45,7 @@ class App extends React.Component {
   filterByTag(tag) {
     let matches = window.policies.filter((policy) => {
       for (let tagId of window.tagLinks[policy.id]) {
-        if (tagId == tag) {
+        if (tagId === tag) {
           return true;
         }
       }
@@ -113,7 +113,11 @@ class App extends React.Component {
             <h3>HOW THEY VOTE</h3>
             <p>
               Data from{" "}
-              <a href="https://theyvoteforyou.org.au/" target="_blank">
+              <a
+                href="https://theyvoteforyou.org.au/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 theyvoteforyou.org.au
               </a>{" "}
               organised into their political parties.
@@ -146,7 +150,7 @@ class App extends React.Component {
             {this.state.policyIds.length > 0 &&
               !this.state.query &&
               !this.state.tag && (
-                <div className="text-center p-3">
+                <div className="text-center p-4">
                   <Button
                     variant="btn btn-outline-secondary"
                     onClick={this.loadMore}
@@ -166,7 +170,7 @@ function TagFilters(props) {
   return (
     <div className="mb-3 d-inline-flex gap-1 flex-wrap">
       {window.tags.map((tag, index) =>
-        props.tag == index ? (
+        props.tag === index ? (
           <span
             value={index}
             onClick={() => props.removeTag(index)}
