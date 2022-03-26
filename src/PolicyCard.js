@@ -69,6 +69,14 @@ function DivisionModal(props) {
             <p className="text-capitalize mb-0">
               <strong>{e.division.name}</strong>
             </p>
+            <a
+              href={`https://theyvoteforyou.org.au/divisions/${e.division.house}/${e.division.date}/${e.division.number}`}
+              target="blank"
+              rel="noreferrer"
+            >
+              https://theyvoteforyou.org.au/divisions/
+              {e.division.house}/{e.division.date}/{e.division.number}
+            </a>
             <p className="m-0 text-capitalize text-muted">
               <em>
                 {e.division.house} - {e.division.date}
@@ -143,14 +151,15 @@ class PolicyGraph extends React.Component {
       <>
         <div className="d-flex pb-2 grey-underline-divider">
           <div style={{ flexBasis: "132px" }}></div>
-          <div className="w-100 text-center">
-            <div>Agreement Percentage</div>
+          <div className="w-100 text-center d-flex justify-content-around">
+            <div>Disagree</div>
+            <div>Agree</div>
           </div>
           <div
             className=" d-flex justify-content-center"
             style={{ flexBasis: "80px" }}
           >
-            People
+            MPs
           </div>
         </div>
         {this.state.parties.map((party) => (
@@ -193,6 +202,13 @@ class PolicyGraph extends React.Component {
           </div>
           <div style={{ flexBasis: "64px" }}></div>
         </div>
+        <div className="d-flex">
+          <div style={{ flexBasis: "124px" }}></div>
+          <div className="w-100 text-center graph-label-font pt-1">
+            No/Yes Percentage
+          </div>
+          <div style={{ flexBasis: "64px" }}></div>
+        </div>
 
         <PeopleModal
           people={this.state.people}
@@ -228,12 +244,19 @@ function PeopleModal(props) {
         >
           {partyName}
         </h5>
+        <div className="d-flex justify-content-between fw-bold">
+          <p>MP</p>
+          <p>Agreement Rate</p>
+        </div>
 
         {props.people.people.map((e) => (
-          <p key={e.person.latest_member.id}>
-            {e.person.latest_member.name.first}{" "}
-            {e.person.latest_member.name.last}: {e.member.agreement}%
-          </p>
+          <div className="d-flex justify-content-between">
+            <p key={e.person.latest_member.id}>
+              {e.person.latest_member.name.first}{" "}
+              {e.person.latest_member.name.last}:
+            </p>
+            <p>{e.member.agreement}%</p>
+          </div>
         ))}
       </Modal.Body>
       <Modal.Footer>
